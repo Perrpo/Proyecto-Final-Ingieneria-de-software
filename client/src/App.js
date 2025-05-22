@@ -1,17 +1,20 @@
-// client/src/App.js
-import React from "react";
-import "./App.css";
-import logo from "./logo.png";
-import Login from "./Login";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from './components/Login';
+import AdminDashboard from './dashboard/AdminDashboard';
+import SupervisorDashboard from './dashboard/SupervisorDashboard';
+import EmpleadoDashboard from './dashboard/EmpleadoDashboard';
 
 function App() {
   return (
-    <div>
-      <div className="header">
-        <img src={logo} alt="Energytic logo" />
-      </div>
-      <Login />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard/admin" element={<AdminDashboard />} />
+        <Route path="/dashboard/supervisor" element={<SupervisorDashboard />} />
+        <Route path="/dashboard/empleado" element={<EmpleadoDashboard />} />
+      </Routes>
+    </Router>
   );
 }
 
