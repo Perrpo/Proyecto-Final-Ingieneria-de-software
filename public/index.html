@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background-color: #f4f4f4;
+    }
+    form {
+      background: white;
+      padding: 2em;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input {
+      display: block;
+      margin-bottom: 1em;
+      width: 100%;
+      padding: 0.5em;
+    }
+    button {
+      padding: 0.5em;
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <form id="loginForm">
+    <h2>Iniciar Sesión</h2>
+    <input type="text" id="usuario" placeholder="Usuario" required />
+    <input type="password" id="contrasena" placeholder="Contraseña" required />
+    <button type="submit">Entrar</button>
+    <p id="mensaje" style="color:red;"></p>
+  </form>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const usuario = document.getElementById('usuario').value;
+      const contrasena = document.getElementById('contrasena').value;
+
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ usuario, contrasena })
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert("Login exitoso. Token: " + data.token);
+        // Aquí puedes redirigir, guardar el token, etc.
+        // window.location.href = "/dashboard.html";
+      } else {
+        document.getElementById('mensaje').textContent = data.mensaje || "Error al iniciar sesión";
+      }
+    });
+  </script>
+</body>
+</html>
