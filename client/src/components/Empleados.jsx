@@ -4,7 +4,7 @@ function Empleados() {
   const [empleados, setEmpleados] = useState([]);
 
   useEffect(() => {
-    fetch('/api/usuario')
+    fetch('/api/users')
       .then(res => res.json())
       .then(data => setEmpleados(data))
       .catch(err => console.error('Error al cargar empleados:', err));
@@ -24,9 +24,7 @@ function Empleados() {
             <tr>
               <th style={{ textAlign: 'left', padding: 8 }}>ID Empleado</th>
               <th style={{ textAlign: 'left', padding: 8 }}>Nombres</th>
-              <th style={{ textAlign: 'left', padding: 8 }}>Apellidos</th>
-              <th style={{ textAlign: 'left', padding: 8 }}>Documento</th>
-              <th style={{ textAlign: 'left', padding: 8 }}>Telefono</th>
+              <th style={{ textAlign: 'left', padding: 8 }}>Rol</th>
             </tr>
           </thead>
           <tbody>
@@ -34,9 +32,7 @@ function Empleados() {
               <tr key={emp.id || idx}>
                 <td style={{ padding: 8 }}>{emp.id || `0${idx + 1}`}</td>
                 <td style={{ padding: 8 }}>{emp.nombre}</td>
-                <td style={{ padding: 8 }}>{emp.apellidos || ''}</td>
-                <td style={{ padding: 8 }}>{emp.documento || ''}</td>
-                <td style={{ padding: 8 }}>{emp.telefono || ''}</td>
+                <td style={{ padding: 8 }}>{emp.Rol?.nombre || ''}</td>
               </tr>
             ))}
           </tbody>

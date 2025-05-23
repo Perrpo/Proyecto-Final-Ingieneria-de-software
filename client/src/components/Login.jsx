@@ -24,10 +24,8 @@ function Login() {
       const payload = JSON.parse(atob(token.split('.')[1]));
       const rol = payload.rol;
 
-      if (rol === 'admin') {
-        navigate('/dashboard/admin');
-      } else if (rol === 'supervisor') {
-        navigate('/dashboard/supervisor');
+      if (rol === 'administrador' || rol === 'supervisor') {
+        navigate('/escritorio');
       } else if (rol === 'empleado') {
         navigate('/dashboard/empleado');
       } else {
@@ -39,16 +37,79 @@ function Login() {
   };
 
   return (
-    <div className="login-box">
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Usuario</label>
-        <input value={username} onChange={e => setUsername(e.target.value)} />
-        <label>Contraseña</label>
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-        <button type="submit">Entrar</button>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-      </form>
+    <div>
+      <div style={{
+        background: '#000',
+        padding: '1.5rem 0',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}>
+        <img src="/logo.png" alt="Logo" style={{ height: 60 }} />
+      </div>
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '80vh'
+      }}>
+        <div style={{
+          background: '#fff',
+          borderRadius: 20,
+          boxShadow: '0 4px 24px #0002',
+          padding: 40,
+          minWidth: 350,
+          textAlign: 'center'
+        }}>
+          <h2 style={{ marginBottom: 32 }}>Iniciar Sesión</h2>
+          <form onSubmit={handleSubmit}>
+            <label style={{ display: 'block', textAlign: 'left', marginBottom: 4 }}>Usuario</label>
+            <input
+              value={username}
+              onChange={e => setUsername(e.target.value)}
+              placeholder="Tu usuario"
+              style={{
+                width: '100%',
+                padding: 10,
+                marginBottom: 16,
+                borderRadius: 6,
+                border: '1px solid #ccc'
+              }}
+            />
+            <label style={{ display: 'block', textAlign: 'left', marginBottom: 4 }}>Contraseña</label>
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="Tu contraseña"
+              style={{
+                width: '100%',
+                padding: 10,
+                marginBottom: 24,
+                borderRadius: 6,
+                border: '1px solid #ccc'
+              }}
+            />
+            <button
+              type="submit"
+              style={{
+                width: '100%',
+                background: '#000',
+                color: '#fff',
+                border: 'none',
+                borderRadius: 8,
+                padding: '12px 0',
+                fontSize: 18,
+                fontWeight: 500,
+                cursor: 'pointer'
+              }}
+            >
+              Iniciar Sesión
+            </button>
+            {error && <p style={{ color: 'red', marginTop: 16 }}>{error}</p>}
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
